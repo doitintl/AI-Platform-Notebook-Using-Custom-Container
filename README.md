@@ -7,7 +7,18 @@ Following Google Cloud docs about using custom continer[1], <b>the recommended w
 
 In order to be compatible with AI Platform Notebooks, changes were made in the jupyter_notebook_confing.py, and new the Dockerfile-root is the new one that includes the all necessary changes.
 
-Now, all that we need to care about is to build a new image from the "Dockerfile-root" push it to the DockerHub or to the <a href="https://cloud.google.com/ml-engine/docs/custom-containers-training#build-and-push-container"> GCR<a/>.
+The next step is to create an image from the <b>Dockerfile-root</b> and push it to the GCR.
 
-Create a new Notebook from the Custom container.
+Run the following command:
+
+1. docker build -f Dockerfile-root -t gcr.io/<PROJECT-ID>/<IMAGENAME>:<TAG> .
+
+2. gcloud auth configure-docker
+
+3. docker push gcr.io/<PROJECT-ID>/<IMAGENAME>:<TAG>
+  
+At this point, we have a new container in the GCR, and we can create new Notebook using this image.
+
+To create a new Notebook using the new image please follow up Google instructions https://cloud.google.com/ai-platform/notebooks/docs/custom-container#create_an_instance_using_a_custom_container
+
 
